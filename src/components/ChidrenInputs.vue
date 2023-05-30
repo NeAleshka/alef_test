@@ -10,7 +10,7 @@
       >
         <template #text>
           <div class="flex space-x-[8px]">
-            <img src="public/images/Union.svg" alt="add" />
+            <img src="/images/Union.svg" alt="add" />
             <span>Добавить ребёнка</span>
           </div>
         </template>
@@ -40,7 +40,7 @@
               placeholder="Введите возраст"
               class="w-full outline-0"
               v-model="component.childrenAge"
-              @input="checkValidAge(component.childrenAge)"
+              @input="checkValidAge(+component.childrenAge)"
             />
           </div>
           <div
@@ -59,12 +59,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, defineExpose, computed, defineProps } from "vue";
+import { ref, reactive, computed } from "vue";
 import { ChildrenInput } from "../interfaces";
 import SolidButton from "../components/SolidButton.vue";
 
-const components = ref([]);
-const inputValues = reactive({ result: Array as ChildrenInput[] });
+const components = ref<ChildrenInput[]>([]);
+const inputValues: ChildrenInput[] = reactive([]);
 const limitedChildren = computed(() => Boolean(components.value.length === 5));
 
 const props = defineProps({
@@ -75,7 +75,7 @@ const props = defineProps({
 });
 const addComponent = () => {
   components.value.push({
-    id: new Date(),
+    id: new Date().toString(),
     childrenName: "",
     childrenAge: "",
   });
@@ -83,15 +83,13 @@ const addComponent = () => {
 
 const isValidAge = ref(true);
 const collectValues = () => {
-  const result = [];
   components.value.forEach((child) => {
-    result.push(child);
+    inputValues.push(child);
   });
-  inputValues.result = result;
 };
 
 const checkValidAge = (age: number) => {
-  isValidAge.value = age < props.parentAge;
+  isValidAge.value = age < parseInt(props.parentAge as string);
 };
 
 const removeChildren = (removeId: string) => {

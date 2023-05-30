@@ -14,7 +14,7 @@
           ref="ageParentRef"
         />
         <div
-          v-if="parentAge && parentAge < 18"
+          v-if="parentAge && +parentAge < 18"
           class="text-red-500 text-[12px] font-medium"
         >
           Возраст родителя должен быть не менее 18
@@ -42,7 +42,7 @@ const isInvalidForSave = ref(true);
 const parentName = ref("");
 const parentAge = ref("");
 const parentArray: IParent[] =
-  JSON.parse(localStorage.getItem(PARENT_ARRAY_KEY) ) || [];
+  JSON.parse(localStorage.getItem(PARENT_ARRAY_KEY) as string) || [];
 const nameParentRef = ref();
 const ageParentRef = ref();
 const childrenInputsRef = ref();
@@ -63,7 +63,6 @@ const btnClick = () => {
   childrenInputsRef.value.collectValues();
   newParent.children = childrenInputsRef.value.inputValues;
   parentArray.push(newParent);
-  debugger;
   localStorage.setItem(PARENT_ARRAY_KEY, JSON.stringify(parentArray));
   cleanData();
 };
