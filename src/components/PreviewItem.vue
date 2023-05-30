@@ -5,7 +5,7 @@
       <p class="font-bold mb-[60px]">{{props.parentName}}, {{props.parentAge}} лет</p>
     </div>
     <h2 class="font-bold font-medium mb-[20px]">Дети</h2>
-    <div v-for="child in props.children" class="text-[16px] bg-[#F1F1F1] px-[20px] py-[10px] font-bold mb-[20px]">
+    <div v-for="child in props.children.result" class="text-[16px] bg-[#F1F1F1] px-[20px] py-[10px] font-bold mb-[20px]">
       {{child.childrenName}}, {{child.childrenAge}} лет
     </div>
   </div>
@@ -24,7 +24,7 @@ const props=defineProps({
     type:String
   },
   children:{
-    type:Array as PropType<IChildren[]>,
+    type:Array ,
     required:false,
     default:[]
   }

@@ -12,7 +12,7 @@
 </template>
 
 <script lang=ts setup>
-import {CSSProperties, defineProps, PropType, defineEmits} from 'vue'
+import {CSSProperties, PropType} from 'vue'
 
 const props = defineProps({
   text: {
