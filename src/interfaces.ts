@@ -3,4 +3,12 @@ export interface IParent {
     age:string
     children?:IChildren[]
 }
-interface IChildren extends IParent{}
+export interface IChildren {
+    childrenName:string
+    childrenAge:string
+}
+
+export interface ChildrenInput {
+    childrenName:HTMLInputElement
+    childrenAge:HTMLInputElement
+}

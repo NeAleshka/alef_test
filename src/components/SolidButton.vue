@@ -4,9 +4,10 @@
           @click="emitClick"
           :disabled="props.disabled"
   >
-  <span class="text-white text-[14px] leading-[24px]" :style="props.textStyles">
+  <span v-if="!props.useSlot" class="text-white text-[14px] leading-[24px]" :style="props.textStyles">
     {{ props.text || 'Text' }}
   </span>
+    <slot v-else name="text"></slot>
   </button>
 </template>
 
@@ -28,6 +29,10 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     required: false
+  },
+  useSlot:{
+    type:Boolean,
+    required:false
   }
 })
 

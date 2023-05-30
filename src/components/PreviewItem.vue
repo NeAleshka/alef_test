@@ -1,14 +1,20 @@
 <template>
-  <div>
-    {{props.parentName}} {{props.parentAge}}
+  <div class="flex flex-col mb-[100px]">
+    <h2 class="mb-[20px] font-medium">Персональные данные</h2>
+    <div>
+      <p class="font-bold mb-[60px]">{{props.parentName}}, {{props.parentAge}} лет</p>
     </div>
-
+    <h2 class="font-bold font-medium mb-[20px]">Дети</h2>
+    <div v-for="child in props.children" class="text-[16px] bg-[#F1F1F1] px-[20px] py-[10px] font-bold mb-[20px]">
+      {{child.childrenName}}, {{child.childrenAge}} лет
+    </div>
+  </div>
 
 </template>
 
 <script lang=ts setup>
 import { defineProps,PropType} from 'vue'
-import {IParent} from "../interfaces";
+import {IChildren} from "../interfaces";
 
 const props=defineProps({
   parentName:{
@@ -18,7 +24,9 @@ const props=defineProps({
     type:String
   },
   children:{
-    type:Array as PropType<IParent[]>
+    type:Array as PropType<IChildren[]>,
+    required:false,
+    default:[]
   }
 })
 

@@ -1,7 +1,12 @@
 <template>
   <div class="px-[16px] py-[8px] border-2 rounded-[5px] mb-[10px]">
     <div class="text-[13px] leading-[16px] text-light-gray">{{props.label}}</div>
-    <input :placeholder="`Введите ${props.label.toLowerCase()} родителя`" class="w-full outline-0" v-model.trim="inputValue"
+    <input v-if="props.label==='Имя'" :placeholder="`Введите ${props.label.toLowerCase()} родителя`" class="w-full outline-0"
+           v-model.trim="inputValue"
+           @input="changeValue(props.label,$event.target.value)">
+    <input v-else :placeholder="`Введите ${props.label.toLowerCase()} родителя`" class="w-full outline-0"
+           type="number"
+           v-model.number="inputValue"
            @input="changeValue(props.label,$event.target.value)">
   </div>
 </template>
@@ -14,10 +19,6 @@ const props=defineProps({
     type:String,
     required:true
   },
-  modifier:{
-    type:String,
-    required:false
-  }
 })
 const inputValue=ref('')
 const emits = defineEmits<{
